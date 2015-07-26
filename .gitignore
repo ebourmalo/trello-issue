@@ -2,3 +2,4 @@ node_modules
 .idea
 conf/db.json
 conf/conf.yml
+*.log
