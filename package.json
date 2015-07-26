@@ -18,7 +18,8 @@
     "gulp": "^3.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --harmony index"
   },
   "keywords": [
     "trello",
