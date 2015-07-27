@@ -1,38 +1,38 @@
-var koa = require('koa');
-var router = require('koa-router')();
-var bodyParser = require('koa-bodyparser');
-var accesslog = require('koa-accesslog');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
 var util = require('./lib/util');
 
-var app = koa();
+app.use(bodyParser.json());
+app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser());
-app.use(accesslog());
-
-var TYPE_CREATE = 'createCard';
-
-router.head('/callback', function *(next) {
-    this.body = 'You get the trello callback';
-    yield next;
-});
-router.post('/callback', function *(next) {
-    var ctx = this,
-        action = ctx.request.body.action,
-        card = action.data.card;
-
-    if (action.type === TYPE_CREATE) {
-        this.body = yield util.updateName(card);
-    } else {
-        this.body = '#' + card.id + ' --- ' + action.type;
-    }
-    yield next;
+app.get('/test', function(request, response) {
+  response.send('cool');
 });
 
-router.get('/', function *(next) {
-    this.body = '<h1> Trello Webhook Server</h1>';
-    yield next;
+app.head('/callback', function (req, res) {
+  res.send('You get the trello callback');
+});
+app.post('/callback', function (req, res) {
+  var action = req.body.action;
+  var card = action.data.card;
+  var actions = [
+    'createCard',
+    'updateCard'
+  ];
+
+  var shouldUpdateName = actions.indexOf(action.type) !== -1;
+  if (shouldUpdateName) {
+    this.body = util.updateName(card);
+  }
+
+  res.send('OK');
 });
 
-app.use(router.routes());
+app.get('/', function (req, res) {
+  res.send('Trello Webhook Server');
+});
 
-app.listen('9001');
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});

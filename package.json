@@ -4,11 +4,9 @@
   "description": "webhook for trello, listen and auto edit card to prepend `#num`",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
     "js-yaml": "^3.3.1",
-    "koa": "^0.21.0",
-    "koa-accesslog": "0.0.2",
-    "koa-bodyparser": "^2.0.0",
-    "koa-router": "^5.1.2",
     "lodash": "^3.9.3",
     "node-trello": "^1.1.2",
     "path-exists": "^1.0.0",
@@ -19,7 +17,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --harmony index"
+    "start": "node index"
   },
   "keywords": [
     "trello",

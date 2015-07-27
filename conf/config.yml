@@ -20,3 +20,6 @@ startNumber: 1
 
 # Prefix of the issue number, any string you want, such as `#TASK`
 prefix: '#'
+
+# Existing field to use (id, idShort, name)
+field: ''idShort
