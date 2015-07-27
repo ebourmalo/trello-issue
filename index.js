@@ -17,8 +17,7 @@ app.post('/callback', function (req, res) {
   var action = req.body.action;
   var card = action.data.card;
   var actions = [
-    'createCard',
-    'updateCard'
+    'createCard'
   ];
 
   var shouldUpdateName = actions.indexOf(action.type) !== -1;
